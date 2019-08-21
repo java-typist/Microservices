@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jason.user.model.Role;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Set;
-
 /**
  * @Author Jason
  * @CreateTime 2019/8/19 15:35
@@ -24,4 +22,26 @@ public interface RoleMapper extends BaseMapper<Role> {
     @Select("select * from table_role where id in " +
             "(select roleId from map_user_role where userId=#{userId})")
     Role findByUserId(@Param("userId") Integer userId);
+
+    @Insert({
+            "<script>",
+            "insert into map_role_manage",
+            "(roleId, manageId)values",
+            "<foreach collection='manages' item='manage' separator=','>",
+            "(#{id}, #{manage.id})",
+            "</foreach>",
+            "</script>"
+    })
+    int relation(Role role);
+
+    @Delete({
+            "<script>",
+            "delete from map_role_manage",
+            "where roleId=#{Id} and ",
+            "<foreach collection='manages' item='manage'>",
+            "manageId=#{manage.id}",
+            "</foreach>",
+            "</script>"
+    })
+    int deleteMap(Role role);
 }

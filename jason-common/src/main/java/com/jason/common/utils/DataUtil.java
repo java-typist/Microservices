@@ -1,5 +1,7 @@
 package com.jason.common.utils;
 
+import org.springframework.util.DigestUtils;
+
 /**
  * 通用的数据加密，数据简要处理都在此类
  *
@@ -9,4 +11,14 @@ package com.jason.common.utils;
  * @Version 1.0
  */
 public class DataUtil {
+
+    /**
+     * MD5加密算法
+     *
+     * @param text
+     * @return
+     */
+    public static String MD5(String text) {
+        return DigestUtils.md5DigestAsHex(text.getBytes());
+    }
 }

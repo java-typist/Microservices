@@ -7,6 +7,7 @@
         <module>jason-eureka-server</module>
         <module>jason-user-service</module>
         <module>jason-common</module>
+        <module>jason-project-demo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

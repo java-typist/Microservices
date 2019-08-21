@@ -1,5 +1,10 @@
 package com.jason.user.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Set;
 
 /**
@@ -8,10 +13,13 @@ import java.util.Set;
  * @Modify 2019/8/19 11:40
  * @Version 1.0
  */
+@TableName(value = "table_role")
 public class Role {
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String name;
     private Integer level;
+    @TableField(exist = false)
     private Set<Manage> manages;
 
     public Integer getId() {

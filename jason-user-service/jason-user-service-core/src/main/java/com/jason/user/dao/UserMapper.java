@@ -29,4 +29,42 @@ public interface UserMapper extends BaseMapper<User> {
     })
     @Select("select * from table_user where id=#{userId}")
     User findById(@Param("userId") Integer userId);
+
+    @Insert({
+            "<script>",
+            "insert into map_user_role",
+            "(userId, roleId)",
+            "values(#{userId},",
+            "<foreach collection='roles' item='role' separator=',' close=')'>",
+            "#{role.id}",
+            "</foreach>",
+            "</script>"
+    })
+    int uRelation(User user);
+
+    @Delete({
+            "<script>",
+            "delete from map_user_role",
+            "where userId=#{id} and ",
+            "<foreach collection='roles' item='role'>",
+            "roleId=#{role.id}",
+            "</foreach>",
+            "</script>"
+    })
+    int deleteMap(User user);
+
+    @Update({
+            "<script>",
+            "update table_user <set>",
+            "<if test='nickname !=null'>name=#{name},</if>",
+            "<if test='password !=null'>password=#{password},</if>",
+            "<if test='phone != null'>phone=#{phone},</if>",
+            "<if test='email != null'>email=#{email},</if>",
+            "<if test='status != null'>status=#{status},</if>",
+            "update_time=#{updateTime}",
+            "</set>",
+            "where username=#{username}",
+            "</script>"
+    })
+    int dynamicUpdate(User user);
 }
