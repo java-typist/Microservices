@@ -5,14 +5,6 @@ import com.jason.user.model.Manage;
 import com.jason.user.model.Role;
 import com.jason.user.model.User;
 
-import java.util.Set;
-
-/**
- * @Author Jason
- * @CreateTime 2019/8/19 11:46
- * @Modify 2019/8/19 11:46
- * @Version 1.0
- */
 public interface UserService extends IService<User> {
     User getUser(Integer userId);
 

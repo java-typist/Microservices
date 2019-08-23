@@ -7,12 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.Set;
 
-/**
- * @Author Jason
- * @CreateTime 2019/8/19 11:40
- * @Modify 2019/8/19 11:40
- * @Version 1.0
- */
 @TableName(value = "table_role")
 public class Role {
     @TableId(value = "id", type = IdType.AUTO)

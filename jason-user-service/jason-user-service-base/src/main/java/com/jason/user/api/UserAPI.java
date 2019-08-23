@@ -1,20 +1,15 @@
 package com.jason.user.api;
 
 import com.jason.common.model.Response;
+import com.jason.user.fallback.UserServiceFallbackFactory;
+import com.jason.user.logger.UserFeignLogConfig;
 import com.jason.user.model.Manage;
 import com.jason.user.model.Role;
 import com.jason.user.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-
-/**
- * @Author Jason
- * @CreateTime 2019/8/21 14:06
- * @Modify 2019/8/21 14:06
- * @Version 1.0
- */
-@FeignClient(value = "jason-user-service")
+@FeignClient(value = "jason-user-service", fallbackFactory = UserServiceFallbackFactory.class, configuration = UserFeignLogConfig.class)
 public interface UserAPI {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

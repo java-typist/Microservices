@@ -8,12 +8,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import java.util.Set;
 
-/**
- * @Author Jason
- * @CreateTime 2019/8/19 11:21
- * @Modify 2019/8/19 11:21
- * @Version 1.0
- */
 @TableName(value = "table_user")
 public class User {
     @TableId(value = "id", type = IdType.AUTO)
