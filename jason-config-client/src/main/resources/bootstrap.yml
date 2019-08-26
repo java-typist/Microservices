@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      profile: test
+      label: master
+      uri: http://localhost:7777
+server:
+  port: 7778
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, refresh

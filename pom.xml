@@ -11,6 +11,7 @@
         <module>jason-service-dashboard</module>
         <module>Jason-gateway</module>
         <module>jason-config</module>
+        <module>jason-config-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

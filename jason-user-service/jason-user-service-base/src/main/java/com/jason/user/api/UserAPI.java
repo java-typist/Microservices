@@ -9,7 +9,7 @@ import com.jason.user.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(value = "jason-user-service", fallbackFactory = UserServiceFallbackFactory.class, configuration = UserFeignLogConfig.class)
+@FeignClient(value = "user-service", fallbackFactory = UserServiceFallbackFactory.class, configuration = UserFeignLogConfig.class)
 public interface UserAPI {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
