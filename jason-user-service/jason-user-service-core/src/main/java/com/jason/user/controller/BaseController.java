@@ -4,15 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jason.common.model.Constant;
 import com.jason.common.model.Response;
 import com.jason.common.utils.DataUtil;
+import com.jason.user.UserServiceAPP;
 import com.jason.user.model.Role;
 import com.jason.user.model.User;
 import com.jason.user.service.UserService;
 import com.jason.user.utils.TokenUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -22,10 +30,18 @@ import java.util.HashSet;
  * @Version 1.0
  */
 @RestController
+@EnableBinding(Sink.class)
 public class BaseController {
 
     @Resource
     private UserService userService;
+
+    private static Log logger = LogFactory.getLog(UserServiceAPP.class);
+
+    @StreamListener(Sink.INPUT)
+    public void receive(Object object) {
+        logger.info("receive:" + object);
+    }
 
     @PostMapping(value = "/register")
     public Response register(@RequestBody User user) {
@@ -37,7 +53,7 @@ public class BaseController {
             response.error(Constant.REQUEST_FAILURE, "用户名不可用");
         } else {
             Role role = userService.getRole("user");
-            user.setRoles(new HashSet<>());
+            user.setRoles(new ArrayList<>());
             user.getRoles().add(role);
             if (userService.addUser(user).equals(Constant.MAPPER_SUCCESS)) {
                 response.success(Constant.REQUEST_SUCCESS, "操作成功", user);
@@ -64,6 +80,16 @@ public class BaseController {
             response.error(Constant.REQUEST_FAILURE, "密码不匹配");
         }
         return response;
+    }
+
+    /**
+     * 负载均衡健康检查接口
+     *
+     * @return
+     */
+    @RequestMapping(value = "/health")
+    public String health() {
+        return "ok";
     }
 
 }

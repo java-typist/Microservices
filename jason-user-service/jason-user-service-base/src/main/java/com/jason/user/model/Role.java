@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.util.List;
 import java.util.Set;
 
 @TableName(value = "table_role")
@@ -14,7 +15,7 @@ public class Role {
     private String name;
     private Integer level;
     @TableField(exist = false)
-    private Set<Manage> manages;
+    private List<Manage> manages;
 
     public Integer getId() {
         return id;
@@ -40,11 +41,11 @@ public class Role {
         this.level = level;
     }
 
-    public Set<Manage> getManages() {
+    public List<Manage> getManages() {
         return manages;
     }
 
-    public void setManages(Set<Manage> manages) {
+    public void setManages(List<Manage> manages) {
         this.manages = manages;
     }
 

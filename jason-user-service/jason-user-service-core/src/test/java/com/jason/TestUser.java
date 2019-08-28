@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class TestUser {
         QueryWrapper<Manage> queryWrapper = new QueryWrapper<>();
         queryWrapper.groupBy("id");
         List<Manage> manage = manageMapper.selectList(queryWrapper);
-        Set<Manage> manages = new HashSet<>();
+        List<Manage> manages = new ArrayList<>();
         manages.addAll(manage);
         Role role = roleMapper.selectById(2);
         role.setManages(manages);

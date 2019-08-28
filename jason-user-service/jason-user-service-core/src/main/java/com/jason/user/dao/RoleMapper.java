@@ -3,6 +3,9 @@ package com.jason.user.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jason.user.model.Role;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
+
+import java.util.List;
 
 /**
  * @Author Jason
@@ -17,11 +20,11 @@ public interface RoleMapper extends BaseMapper<Role> {
             @Result(property = "name", column = "name"),
             @Result(property = "level", column = "level"),
             @Result(property = "manages", column = "id", many = @Many(
-                    select = "com.jason.user.dao.ManageMapper.findByRoleId"))
+                    select = "com.jason.user.dao.ManageMapper.findByRoleId", fetchType = FetchType.LAZY))
     })
     @Select("select * from table_role where id in " +
             "(select roleId from map_user_role where userId=#{userId})")
-    Role findByUserId(@Param("userId") Integer userId);
+    List<Role> findByUserId(@Param("userId") Integer userId);
 
     @Insert({
             "<script>",

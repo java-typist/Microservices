@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jason.user.model.Manage;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * @Author Jason
  * @CreateTime 2019/8/19 15:36
@@ -19,5 +21,5 @@ public interface ManageMapper extends BaseMapper<Manage> {
     })
     @Select(value = "select * From table_manage where id in " +
             "(select manageId from map_role_manage where roleId=#{roleId})")
-    Manage findByRoleId(@Param("roleId") Integer roleId);
+    List<Manage> findByRoleId(@Param("roleId") Integer roleId);
 }

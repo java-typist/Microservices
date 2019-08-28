@@ -34,6 +34,7 @@ public class UserController {
      */
     @GetMapping(value = "/user")
     public Response getUser(@RequestParam(value = "userId") Integer userId) {
+        System.out.println(userId);
         Response response = new Response();
         User user = userService.getUser(userId);
         if (user == null) {
@@ -73,6 +74,7 @@ public class UserController {
     @GetMapping(value = "/user/msg/{username}")
     public Response getUser(@PathVariable(value = "username") String username) {
         Response response = new Response();
+        System.out.println(username);
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.eq("username", username);
         userQueryWrapper.ne("status", Constant.USER_UNAVAILABLE);

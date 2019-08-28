@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  */
 @RestController
-//@RefreshScope
+@RefreshScope
 public class TestConfigller {
 
     @Value(value = "${from}")

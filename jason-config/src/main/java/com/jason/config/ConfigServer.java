@@ -3,6 +3,7 @@ package com.jason.config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @Author Jason
@@ -12,6 +13,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
  */
 @EnableConfigServer
 @SpringBootApplication
+@EnableEurekaClient
 public class ConfigServer {
 
     public static void main(String[] args) {

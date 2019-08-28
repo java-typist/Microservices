@@ -21,4 +21,14 @@ public class DataUtil {
     public static String MD5(String text) {
         return DigestUtils.md5DigestAsHex(text.getBytes());
     }
+
+    /**
+     * 分布式ID生成器,snowflake算法
+     * @param data
+     * @return
+     */
+    public static synchronized String snowFlake(String data){
+        //todo
+        return null;
+    }
 }

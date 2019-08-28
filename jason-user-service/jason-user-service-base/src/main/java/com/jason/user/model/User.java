@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @TableName(value = "table_user")
-public class User {
+public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String username;    //用户名，唯一
@@ -22,7 +24,7 @@ public class User {
     private Date updateTime;    //用户最后信息修改时间
     private Date loginTime;     //用户最后登录时间
     @TableField(exist = false)
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public Integer getId() {
         return id;
@@ -114,11 +116,11 @@ public class User {
         this.loginTime = loginTime;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

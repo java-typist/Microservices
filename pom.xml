@@ -12,6 +12,7 @@
         <module>Jason-gateway</module>
         <module>jason-config</module>
         <module>jason-config-client</module>
+        <module>jason-rabbitmq</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -27,7 +28,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring.cloud.version>Finchley.SR2</spring.cloud.version>
+        <spring.cloud.version>Greenwich.SR2</spring.cloud.version>
     </properties>
 
     <dependencies>

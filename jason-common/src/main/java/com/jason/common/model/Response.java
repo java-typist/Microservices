@@ -1,6 +1,9 @@
 package com.jason.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 
 /**
  * @Author Jason
@@ -8,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @Modify 2019/8/20 11:47
  * @Version 1.0
  */
-public class Response<T> {
+public class Response<T> implements Serializable {
 
     @JsonProperty("status")
     private Integer status;
