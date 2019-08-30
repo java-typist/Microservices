@@ -11,8 +11,12 @@ import com.jason.user.model.User;
 import com.jason.user.service.UserService;
 import com.jason.user.utils.TokenUtil;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * @Author Jason
@@ -73,6 +77,13 @@ public class UserController {
      */
     @GetMapping(value = "/user/msg/{username}")
     public Response getUser(@PathVariable(value = "username") String username) {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        Enumeration<String> headers = request.getHeaderNames();
+        while (headers.hasMoreElements()) {
+            String header = headers.nextElement();
+            System.out.println(header + ":" + request.getHeader(header));
+        }
         Response response = new Response();
         System.out.println(username);
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
@@ -89,6 +100,7 @@ public class UserController {
 
     /**
      * 用户账户状态
+     *
      * @param user
      * @return
      */

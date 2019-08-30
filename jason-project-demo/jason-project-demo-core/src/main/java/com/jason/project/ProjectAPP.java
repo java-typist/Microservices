@@ -3,6 +3,7 @@ package com.jason.project;
 import com.jason.user.api.UserAPI;
 import com.jason.user.fallback.UserServiceFallbackFactory;
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Bean;
 @EnableFeignClients(value = "com.jason.user.api")
 @SpringBootApplication
 @EnableEurekaClient
+@MapperScan(value = "com.jason.project.dao")
 public class ProjectAPP {
     public static void main(String[] args) {
         SpringApplication.run(ProjectAPP.class, args);

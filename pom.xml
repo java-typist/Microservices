@@ -13,6 +13,8 @@
         <module>jason-config</module>
         <module>jason-config-client</module>
         <module>jason-rabbitmq</module>
+        <module>shop-client</module>
+        <module>jason-product</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

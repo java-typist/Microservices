@@ -18,6 +18,7 @@ public class Response<T> implements Serializable {
     @JsonProperty("message")
     private String message;
     @JsonProperty("data")
+    @JsonIgnoreProperties(value = "handler")
     private T data;
 
     public void success(Integer status, String message, T data) {

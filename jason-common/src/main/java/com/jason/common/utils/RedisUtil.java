@@ -2,7 +2,10 @@ package com.jason.common.utils;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.StringUtils;
 
+import java.sql.Time;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,11 +45,30 @@ public class RedisUtil {
 
     /**
      * 删除某个缓存记录
+     *
      * @param key
      * @param <T>
      */
     public static <T> void remove(String key) {
         RedisTemplate<String, T> redisTemplate = new RedisTemplate<>();
         redisTemplate.delete(key);
+    }
+
+    public static String create(String key) {
+        if (StringUtils.isEmpty(key)) {
+            return null;
+        }
+        String secretKey;
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        if (redisTemplate.hasKey(key)) {
+            if (redisTemplate.boundHashOps(key).getExpire() < 1000 * 60) {
+                redisTemplate.opsForValue().set(key, DataUtil.MD5(UUID.randomUUID().toString()), 30, TimeUnit.MINUTES);
+            }
+            secretKey = (String) redisTemplate.opsForValue().get(key);
+        }else {
+            secretKey = DataUtil.MD5(UUID.randomUUID().toString());
+            redisTemplate.opsForValue().set(key, secretKey, 30, TimeUnit.MINUTES);
+        }
+        return secretKey;
     }
 }
