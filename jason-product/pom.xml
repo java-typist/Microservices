@@ -13,7 +13,20 @@
     <packaging>pom</packaging>
     <modules>
         <module>jason-product-core</module>
+        <module>jason-product-base</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jason</groupId>
+            <artifactId>jason-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

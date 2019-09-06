@@ -1,30 +1,29 @@
 package com.jason.product.dao;
 
+import com.jason.product.dto.ProductDTO;
 import com.jason.product.dto.ProductDetailDTO;
-import com.jason.product.dto.ProductPropertyDTO;
-import com.jason.product.dto.ProductSimpleDTO;
-import com.jason.product.po.ProductPO;
-import org.apache.ibatis.annotations.Mapper;
+import com.jason.product.dto.ProductUpdateDTO;
+import com.jason.product.model.ProductBase;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
  * @Author Jason
- * @CreateTime 2019/8/30 11:39
- * @Modify 2019/8/30 11:39
+ * @CreateTime 2019/9/5 13:29
+ * @Modify 2019/9/5 13:29
  * @Version 1.0
  */
-
+@Repository
 public interface ProductDao {
 
-    ProductPO getById(@Param(value = "id") Integer id);
+    Integer addProduct(ProductBase productBase);
 
-    Integer update(@Param(value = "id") Integer id, @Param(value = "enabled") Boolean enabled);
+    Integer updateProduct(ProductBase productBase);
 
-    ProductDetailDTO getDetail(@Param(value = "id") Integer id);
+    Integer delete(@Param(value = "id")Integer id);
 
-    ProductPropertyDTO getProperty(@Param(value = "id") Integer id);
+    ProductDetailDTO getSimple(@Param(value = "id") Integer id);
 
-    ProductSimpleDTO getSimple(@Param(value = "id") Integer id);
+    ProductDTO getProduct(@Param(value = "id") Integer id);
 
 }

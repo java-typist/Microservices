@@ -15,6 +15,9 @@
         <module>jason-rabbitmq</module>
         <module>shop-client</module>
         <module>jason-product</module>
+        <module>jason-A</module>
+        <module>log-service</module>
+        <module>jason-product</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

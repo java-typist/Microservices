@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.log.dao.LogDao">
+
+    <insert id="addLog" parameterType="com.jason.log.model.Log" useGeneratedKeys="true">
+        insert into table_log(username, type, action, time, description)
+        values(#{username}, #{type}, #{action}, #{time}, #{description})
+    </insert>
+
+    <select id="getLogsByUsername" parameterType="java.lang.String" resultType="com.jason.log.model.Log">
+        select * from table_log
+        where username=#{username}
+    </select>
+
+    <select id="getLogsByUsername" parameterType="java.lang.String" resultType="com.jason.log.model.Log">
+        select * from table_log
+        where type=#{type}
+    </select>
+
+    <select id="getLogsByTypeAndAction" parameterType="java.lang.String" resultType="com.jason.log.model.Log">
+        select * from table_log
+        where type=#{type} and action=#{action}
+    </select>
+
+</mapper>

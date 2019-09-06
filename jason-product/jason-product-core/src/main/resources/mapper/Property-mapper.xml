@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.product.dao.PropertyDao">
+
+    <insert id="addProperty" parameterType="com.jason.product.model.Property" useGeneratedKeys="true">
+        insert into table_product_property(product_id, property, price, enabled,pre_image, count, available)
+        values(#{productId}, #{property}, #{price}, #{enabled}, #{preImage}, #{count}, #{available})
+    </insert>
+
+    <update id="updateProperty" parameterType="com.jason.product.model.Property">
+        update table_product_property set
+        <if test="property != null">
+            property=#{property},
+        </if>
+        <if test="price != null">
+            price=#{price},
+        </if>
+        <if test="preImage != null">
+            pre_image=#{preImage},
+        </if>
+        <if test="enabled != null">
+            enabled=#{enabled}
+        </if>
+        where id=#{id} and available=true
+    </update>
+
+    <update id="deleteById" parameterType="java.lang.Integer">
+        update table_product_property
+        set available=false
+        where id=#{id} and product_id=#{productId} and available=true
+    </update>
+
+    <update id="deleteByProduct" parameterType="java.lang.Integer">
+        update table_product_property
+        set available=false
+        where product_id =#{productId} and available=true
+    </update>
+
+    <select id="getProperty" parameterType="java.lang.Integer" resultType="com.jason.product.dto.PropertyDTO">
+        select id ,property, price, enabled, pre_image
+        from table_product_property
+        where id=#{id} and available=true
+    </select>
+
+    <select id="getByProduct" parameterType="java.lang.Integer" resultType="com.jason.product.dto.PropertyDTO">
+        select id, property, price, enabled, pre_image
+        from table_product_property
+        where product_id=#{productId} and available=true
+    </select>
+</mapper>

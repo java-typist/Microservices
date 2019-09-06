@@ -23,6 +23,7 @@ public class HealthCheck implements IPing {
 
     @Override
     public boolean isAlive(Server server) {
+        System.out.println("check ths service health");
         String url = "http://" + server.getId() + "/health";
         try {
             //rest+ribbon请求数据

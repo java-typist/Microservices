@@ -12,6 +12,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import reactor.netty.http.server.HttpServerRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * @Author Jason
@@ -19,17 +23,19 @@ import reactor.core.publisher.Mono;
  * @Modify 2019/8/29 9:15
  * @Version 1.0
  */
-@Component
+//@Component
 public class JasonFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String secretKey = RedisUtil.create("Jason");
-        ServerHttpRequest request = exchange.getRequest().mutate()
-                .headers(httpHeaders -> httpHeaders.remove("Jason"))
-                .build();
-        ServerHttpRequest newRequest = request.mutate().header("Jason", secretKey).build();
-        return chain.filter(exchange.mutate().request(newRequest.mutate().build()).build());
+//        String secretKey = RedisUtil.create("Jason");
+//        ServerHttpRequest request = exchange.getRequest().mutate()
+//                .headers(httpHeaders -> httpHeaders.remove("Jason"))
+//                .build();
+//        ServerHttpRequest newRequest = request.mutate().header("Jason", secretKey).build();
+//        return chain.filter(exchange.mutate().request(newRequest.mutate().build()).build());
+        System.out.println("?");
+        return chain.filter(exchange);
     }
 
     @Override

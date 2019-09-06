@@ -10,12 +10,14 @@ import com.jason.user.model.Role;
 import com.jason.user.model.User;
 import com.jason.user.service.UserService;
 import com.jason.user.utils.TokenUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Enumeration;
 
 /**
@@ -77,15 +79,15 @@ public class UserController {
      */
     @GetMapping(value = "/user/msg/{username}")
     public Response getUser(@PathVariable(value = "username") String username) {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        Enumeration<String> headers = request.getHeaderNames();
-        while (headers.hasMoreElements()) {
-            String header = headers.nextElement();
-            System.out.println(header + ":" + request.getHeader(header));
-        }
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
+//        Enumeration<String> headers = request.getHeaderNames();
+//        while (headers.hasMoreElements()) {
+//            String header = headers.nextElement();
+//            System.out.println(header + ":" + request.getHeader(header));
+//        }
         Response response = new Response();
-        System.out.println(username);
+        System.out.println(username + ":" + new Date());
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.eq("username", username);
         userQueryWrapper.ne("status", Constant.USER_UNAVAILABLE);

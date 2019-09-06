@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: logservice
+  cloud:
+    config:
+      uri: http://server1:7777
+      label: master
+      profile: test
