@@ -18,6 +18,7 @@
         <module>jason-A</module>
         <module>log-service</module>
         <module>jason-product</module>
+        <module>Jason-order</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
