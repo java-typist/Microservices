@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.order.dao.ItemDao">
+
+    <select id="getItem" parameterType="java.lang.Integer" resultType="com.jason.order.dto.ItemDTO">
+        select * from table_order_item
+        where id=#{id}
+    </select>
+
+    <select id="getItems" parameterType="java.lang.String" resultType="com.jason.order.dto.ItemDTO">
+        select * from table_order_item
+        where order_number=#{orderNumber}
+    </select>
+
+    <insert id="addItem" parameterType="com.jason.order.model.OrderItem" useGeneratedKeys="true" keyColumn="id">
+        insert into table_order_item(order_number, product_id, property_id, pre_image, title,
+                                    property, count, price, total_price, final_price, status,
+                                    reason, update_time)
+                            values(#{orderNumber}, #{productId}, #{propertyId}, #{preImage}, #{title},
+                                    #{property}, #{count}, #{price}, #{totalPrice}, #{finalPrice},
+                                    #{status}, #{reason}, #{updateTime})
+    </insert>
+
+    <update id="updateItem" parameterType="com.jason.order.model.OrderItem">
+        update table_order_item
+        <set>
+            <if test="status != null">
+                status=#{status},
+            </if>
+            <if test="reason != null">
+                reason=#{reason},
+            </if>
+            update_time=#{updateTime}
+        </set>
+        where id=#{id} and order_number=#{orderNumber}
+    </update>
+
+    <update id="deleteItem" parameterType="java.lang.Integer">
+        update table_order_item
+        set available=false
+        where id=#{id} and available=false
+    </update>
+</mapper>

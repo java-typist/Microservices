@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: shop-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server2:9998/eureka
+server:
+  port: 404

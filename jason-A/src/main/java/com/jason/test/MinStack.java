@@ -1,5 +1,9 @@
 package com.jason.test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * @Author Jason
  * @CreateTime 2019/9/9 15:12
@@ -49,5 +53,75 @@ public class MinStack {
             item--;
         }
         return result;
+    }
+
+    /**
+     * 相关符号合法性检查，一下存在问题，记得判空
+     *
+     * @param s
+     * @return
+     */
+    public Boolean isValid(String s) {
+        Stack<Character> list = new Stack<>();
+        char[] c = s.toCharArray();
+        for (char ch : c) {
+            switch (ch) {
+                case '{':
+                case '[':
+                case '(':
+                    list.push(ch);
+                    break;
+                case '}':
+                    if (list.pop().equals('{')) {
+                        break;
+                    } else {
+                        return false;
+                    }
+                case ']':
+                    if (list.pop().equals('[')) {
+                        break;
+                    } else {
+                        return false;
+                    }
+                case ')':
+                    if (list.pop().equals('(')) {
+                        break;
+                    } else {
+                        return false;
+                    }
+
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 逆波兰表达式求解
+     *
+     * @param tokens
+     * @return
+     */
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String str : tokens) {
+            int result = 0;
+            if (str.equals("+")) {
+                result = stack.pop() + stack.pop();
+            } else if (str.equals("-")) {
+                int second = stack.pop();
+                int first = stack.pop();
+                result = first - second;
+            } else if (str.equals("/")) {
+                int second = stack.pop();
+                int first = stack.pop();
+                result = first / second;
+            } else if (str.equals("*")) {
+                result = stack.pop() * stack.pop();
+            } else {
+                result = Integer.valueOf(str);
+            }
+            stack.push(result);
+        }
+        return stack.pop();
     }
 }

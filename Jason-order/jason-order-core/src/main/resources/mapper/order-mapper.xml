@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.order.dao.OrderDao">
+    <resultMap id="dto" type="com.jason.order.dto.OrderDTO" extends="">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="status" property="status"/>
+        <result column="available" property="available"/>
+        <result column="reason" property="reason"/>
+        <result column="discount" property="discount"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="final_price" property="finalPrice"/>
+        <association property="items" select="com.jason.order.dao.ItemDao.getItems"/>
+    </resultMap>
+
+    <select id="getOrder" resultMap="dto" parameterType="java.lang.String">
+        select * from table_order
+        where order_number=#{orderNumber}
+    </select>
+
+    <select id="getOrders" resultMap="dto" parameterType="java.lang.Integer">
+        select * from table_order
+        where user_id=#{userId}
+    </select>
+
+    <select id="getOrdersByStatus" resultMap="dto" parameterType="java.lang.Integer">
+        select * from table_order
+        where user_id=#{userId}
+        and status=#{status}
+    </select>
+
+    <insert id="addOrder" parameterType="com.jason.order.model.Order" useGeneratedKeys="true" keyColumn="id">
+        insert into table_order(user_id, order_number, status, create_time,
+                                available, reason, discount, coupon_id,
+                                total_price, final_price, reduce_price)
+                    values (#{userId}, #{orderNumber}, #{status},#{createTime},
+                            #{available}, #{reason}, #{discount}, #{couponId},
+                            #{totalPrice}, #{finalPrice}, #{reductPrice})
+    </insert>
+
+    <update id="updateOrder" parameterType="com.jason.order.model.Order">
+        update table_order
+        <set>
+            <if test="status != null">
+                status=#{status},
+            </if>
+            <if test="reason != null">
+                reason=#{reason}
+            </if>
+        </set>
+        where id=#{id} and user_id=#{userId}
+    </update>
+
+    <update id="deleteOrder" parameterType="java.lang.Integer">
+        update table_order
+        set available=false
+        where id=#{id} and available=true
+    </update>
+
+</mapper>

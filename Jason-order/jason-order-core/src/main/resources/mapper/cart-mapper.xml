@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.order.dao.CartDao">
+
+    <select id="getCart" parameterType="java.lang.Integer" resultType="com.jason.order.dto.ItemDTO">
+        select * from table_cart
+        where id=#{id}
+    </select>
+
+    <select id="getCarts" parameterType="java.lang.Integer" resultType="com.jason.order.dto.ItemDTO">
+        select * from table_cart
+        where user_id=#{userId}
+    </select>
+
+    <insert id="addCart" keyColumn="id" useGeneratedKeys="true" parameterType="com.jason.order.model.Cart">
+        insert into table_cart(user_id, product_id, property_id,
+                                count, status, delete_time, create_time)
+                        values(#{userId}, #{productId}, #{propertyId},
+                                #{count}, #{status}, #{deleteTime}, #{createTime})
+    </insert>
+
+    <update id="updateCart" parameterType="com.jason.order.model.Cart">
+        update table_cart
+        <set>
+            <if test="status != null">
+                status=#{status},
+            </if>
+            <if test="count != null">
+                count=#{count}
+            </if>
+        </set>
+        where id=#{id} and user_id=#{userId}
+    </update>
+
+    <update id="deleteCart" parameterType="java.lang.Integer">
+        update table_cart set
+        status=1, delete_time=#{time}
+        where id=#{id}
+    </update>
+</mapper>

@@ -1,21 +1,19 @@
-package com.jason.order.model;
+package com.jason.order.vo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 /**
- * @Author Jason
- * @CreateTime 2019/9/9 10:57
- * @Modify 2019/9/9 10:57
- * @Version 1.0
+ * @author Jason
+ * @version 1.0
+ * @createTime 2019/9/16 8:16
+ * @modify 2019/9/16 8:16
  */
-public class Order implements Serializable {
+public class OrderVO {
     private Integer id;
     private Integer userId;
     private String orderNumber;
     private Integer status;
-    private Date createTime;
     private Boolean available;
     private String reason;
     private Boolean discount;
@@ -23,6 +21,7 @@ public class Order implements Serializable {
     private BigDecimal totalPrice;
     private BigDecimal finalPrice;
     private BigDecimal reducePrice;
+    private List<ItemVO> items;
 
     public Integer getId() {
         return id;
@@ -30,14 +29,6 @@ public class Order implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
     }
 
     public Integer getUserId() {
@@ -48,12 +39,36 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public Boolean getDiscount() {
@@ -70,30 +85,6 @@ public class Order implements Serializable {
 
     public void setCouponId(Integer couponId) {
         this.couponId = couponId;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 
     public BigDecimal getTotalPrice() {
@@ -118,5 +109,13 @@ public class Order implements Serializable {
 
     public void setReducePrice(BigDecimal reducePrice) {
         this.reducePrice = reducePrice;
+    }
+
+    public List<ItemVO> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemVO> items) {
+        this.items = items;
     }
 }

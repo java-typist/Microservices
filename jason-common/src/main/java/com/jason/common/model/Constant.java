@@ -23,4 +23,15 @@ public class Constant {
     //request请求结果
     public static final Integer REQUEST_SUCCESS = 1;
     public static final Integer REQUEST_FAILURE = -1;
+
+    public static final Integer ORDER_DELETE = -3;
+    public static final Integer ORDER_CANCEL = -2;
+    public static final Integer ORDER_TO_PAY = -1;
+    public static final Integer ORDER_PAID = 0;
+    public static final Integer ORDER_FINISH = 1;
+
+    public static final Integer CART_NORMAL = 0;
+    public static final Integer CART_DELETE = -1;
+    public static final Integer CART_TO_ORDER = 1;
+
 }

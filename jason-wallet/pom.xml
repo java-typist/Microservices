@@ -9,6 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jason-A</artifactId>
+    <artifactId>jason-wallet</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>jason-wallet-core</module>
+    </modules>
+
 
 </project>

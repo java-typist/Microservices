@@ -19,6 +19,7 @@
         <module>log-service</module>
         <module>jason-product</module>
         <module>Jason-order</module>
+        <module>jason-wallet</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

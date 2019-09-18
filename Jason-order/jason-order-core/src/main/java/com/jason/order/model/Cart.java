@@ -12,7 +12,10 @@ public class Cart {
     private Integer id;
     private Integer userId;
     private Integer productId;
-    private Boolean available;
+    private Integer propertyId;
+    private Integer count;
+    private Integer status;
+    private Date deleteTime;
     private Date createTime;
 
     public Integer getId() {
@@ -39,12 +42,36 @@ public class Cart {
         this.productId = productId;
     }
 
-    public Boolean getAvailable() {
-        return available;
+    public Integer getPropertyId() {
+        return propertyId;
     }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getDeleteTime() {
+        return deleteTime;
+    }
+
+    public void setDeleteTime(Date deleteTime) {
+        this.deleteTime = deleteTime;
     }
 
     public Date getCreateTime() {
@@ -54,4 +81,5 @@ public class Cart {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
 }
