@@ -1,6 +1,8 @@
 package com.jason.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jason.user.dto.user.UserAddDTO;
+import com.jason.user.dto.user.UserUpdateDTO;
 import com.jason.user.model.Manage;
 import com.jason.user.model.Role;
 import com.jason.user.model.User;
@@ -10,9 +12,9 @@ public interface UserService extends IService<User> {
 
     Role getRole(String name);
 
-    Integer addUser(User user);
+    Integer addUser(UserAddDTO user);
 
-    Integer updateUser(User user);
+    Integer updateUser(UserUpdateDTO user);
 
     Integer addUserRole(User user);
 

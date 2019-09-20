@@ -2,8 +2,7 @@ package com.jason.project.controller;
 
 import com.jason.common.model.Response;
 import com.jason.user.api.UserAPI;
-import com.jason.user.model.User;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.jason.user.vo.UserDetailVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * @Author Jason
+ * @author Jason
  * @CreateTime 2019/8/21 14:36
  * @Modify 2019/8/21 14:36
  * @Version 1.0
@@ -23,10 +22,10 @@ public class ProjectController {
     private UserAPI userAPI;
 
     @PostMapping(value = "/enter")
-    public Response enter(@RequestBody User user) {
+    public Response enter(@RequestBody UserDetailVO user) {
         Response response = new Response();
-        Response result = userAPI.getUser(user.getUsername());
-        System.out.println(">>>>" + user.getPassword());
+        Response result = userAPI.getUser("Jason");
+//        System.out.println(">>>>" + user.getPassword());
         return result;
     }
 }

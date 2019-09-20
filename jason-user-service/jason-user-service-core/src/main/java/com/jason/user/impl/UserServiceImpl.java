@@ -6,17 +6,20 @@ import com.jason.common.model.Constant;
 import com.jason.user.dao.ManageMapper;
 import com.jason.user.dao.RoleMapper;
 import com.jason.user.dao.UserMapper;
+import com.jason.user.dto.user.UserAddDTO;
+import com.jason.user.dto.user.UserUpdateDTO;
 import com.jason.user.model.Manage;
 import com.jason.user.model.Role;
 import com.jason.user.model.User;
 import com.jason.user.service.UserService;
+import com.jason.user.utils.ConvertUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 /**
- * @Author Jason
+ * @author Jason
  * @CreateTime 2019/8/20 10:02
  * @Modify 2019/8/20 10:02
  * @Version 1.0
@@ -45,10 +48,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional
-    public Integer addUser(User user) {
-        int result = userMapper.insert(user);
-        if (result > 0 && user.getRoles() != null) {
-            if (addUserRole(user) > 0) {
+    public Integer addUser(UserAddDTO user) {
+        User user1 = new User();
+        int result = userMapper.insert(ConvertUtil.convertAdd(user));
+        if (result > 0 && user1.getRoles() != null) {
+            if (addUserRole(user1) > 0) {
                 return Constant.MAPPER_SUCCESS;
             }
         }
@@ -62,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return
      */
     @Override
-    public Integer updateUser(User user) {
+    public Integer updateUser(UserUpdateDTO user) {
         return null;
     }
 

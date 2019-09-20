@@ -8,7 +8,10 @@ import com.jason.user.UserServiceAPP;
 import com.jason.user.model.Role;
 import com.jason.user.model.User;
 import com.jason.user.service.UserService;
+import com.jason.user.utils.ConvertUtil;
 import com.jason.user.utils.TokenUtil;
+import com.jason.user.vo.UserAddVO;
+import com.jason.user.vo.UserSimpleVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -43,8 +46,13 @@ public class BaseController {
         logger.info("receive:" + object);
     }
 
+    /**
+     * 普通用户注册
+     * @param user
+     * @return
+     */
     @PostMapping(value = "/register")
-    public Response register(@RequestBody User user) {
+    public Response register(@RequestBody UserAddVO user) {
         Response response = new Response();
 
         QueryWrapper<User> userWrapper = new QueryWrapper<>();
@@ -53,9 +61,9 @@ public class BaseController {
             response.error(Constant.REQUEST_FAILURE, "用户名不可用");
         } else {
             Role role = userService.getRole("user");
-            user.setRoles(new ArrayList<>());
-            user.getRoles().add(role);
-            if (userService.addUser(user).equals(Constant.MAPPER_SUCCESS)) {
+            user.setRoleIds(new ArrayList<>());
+            user.getRoleIds().add(role.getId());
+            if (userService.addUser(ConvertUtil.convertAdd(user)).equals(Constant.MAPPER_SUCCESS)) {
                 response.success(Constant.REQUEST_SUCCESS, "操作成功", user);
             } else {
                 response.error(Constant.REQUEST_FAILURE, "操作失败");

@@ -3,9 +3,7 @@ package com.jason.user.fallback;
 import com.jason.common.model.Constant;
 import com.jason.common.model.Response;
 import com.jason.user.api.UserAPI;
-import com.jason.user.model.Manage;
-import com.jason.user.model.Role;
-import com.jason.user.model.User;
+import com.jason.user.vo.*;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -16,14 +14,14 @@ public class UserServiceFallbackFactory implements FallbackFactory<UserAPI> {
     public UserAPI create(Throwable throwable) {
         return new UserAPI() {
             @Override
-            public Response login(User user) {
+            public Response login(UserSimpleVO user) {
                 Response response = new Response();
                 response.error(Constant.REQUEST_FAILURE, throwable.getMessage());
                 return response;
             }
 
             @Override
-            public Response register(User user) {
+            public Response register(UserAddVO user) {
                 return null;
             }
 
@@ -33,7 +31,7 @@ public class UserServiceFallbackFactory implements FallbackFactory<UserAPI> {
             }
 
             @Override
-            public Response update(User user) {
+            public Response update(UserUpdateVO user) {
                 return null;
             }
 
@@ -46,7 +44,7 @@ public class UserServiceFallbackFactory implements FallbackFactory<UserAPI> {
             }
 
             @Override
-            public Response status(User user) {
+            public Response status(UserUpdateVO user) {
                 return null;
             }
 
@@ -56,12 +54,12 @@ public class UserServiceFallbackFactory implements FallbackFactory<UserAPI> {
             }
 
             @Override
-            public Response addRole(Role role) {
+            public Response addRole(RoleVO role) {
                 return null;
             }
 
             @Override
-            public Response getManage(Manage manage) {
+            public Response getManage(ManageVO manage) {
                 return null;
             }
 

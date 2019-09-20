@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.List;
-import java.util.Set;
 
 @TableName(value = "table_role")
 public class Role {

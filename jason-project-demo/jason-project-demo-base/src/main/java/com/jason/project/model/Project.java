@@ -1,6 +1,6 @@
 package com.jason.project.model;
 
-import com.jason.user.model.User;
+import com.jason.user.vo.UserDetailVO;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,8 +25,8 @@ public class Project implements Serializable {
     private Date endTime;
     private Integer status;
     private Integer creatorId;
-    private User creator;
-    private List<User> chargers;
+    private UserDetailVO creator;
+    private List<UserDetailVO> chargers;
 
     public Integer getId() {
         return id;
@@ -116,19 +116,19 @@ public class Project implements Serializable {
         this.creatorId = creatorId;
     }
 
-    public User getCreator() {
+    public UserDetailVO getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(UserDetailVO creator) {
         this.creator = creator;
     }
 
-    public List<User> getChargers() {
+    public List<UserDetailVO> getChargers() {
         return chargers;
     }
 
-    public void setChargers(List<User> chargers) {
+    public void setChargers(List<UserDetailVO> chargers) {
         this.chargers = chargers;
     }
 }

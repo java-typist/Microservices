@@ -3,8 +3,8 @@ package com.jason.common.model;
 /**
  * 此类决定本服务中所有特定状态
  *
- * @Author Jason
- * @CreateTime 2019/8/19 11:30
+ * @author Jason
+ * @since 2019/8/19 11:30
  * @Modify 2019/8/19 11:30
  * @Version 1.0
  */
