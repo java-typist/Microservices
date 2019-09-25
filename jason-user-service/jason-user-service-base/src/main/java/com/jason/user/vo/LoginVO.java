@@ -1,21 +1,19 @@
-package com.jason.user.dto.user;
+package com.jason.user.vo;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  * @author Jason
  * @version 1.0
- * @createTime 2019/9/19 14:38
- * @modify 2019/9/19 14:38
+ * @createTime 2019/9/23 9:52
+ * @modify 2019/9/23 9:52
  */
-public class UserAddDTO {
+public class LoginVO implements Serializable {
 
     private String username;
     private String password;
-    private String nickname;
     private String phone;
     private String email;
-    private List<Integer> roleIds;
 
     public String getUsername() {
         return username;
@@ -33,14 +31,6 @@ public class UserAddDTO {
         this.password = password;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -55,13 +45,5 @@ public class UserAddDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Integer> getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(List<Integer> roleIds) {
-        this.roleIds = roleIds;
     }
 }

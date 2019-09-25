@@ -1,5 +1,6 @@
 package com.jason.user;
 
+import com.jason.common.utils.RedisUtil;
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -35,5 +36,10 @@ public class UserServiceAPP {
         bean.addUrlMappings("/hystrix.stream");
         bean.setName("HystrixMetricsStreamServlet");
         return bean;
+    }
+
+    @Bean
+    RedisUtil redisUtil(){
+        return new RedisUtil();
     }
 }

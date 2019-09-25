@@ -1,17 +1,9 @@
 package com.jason.user.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-@TableName(value = "table_user")
 public class User implements Serializable {
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String username;    //用户名，唯一
     private String nickname;    //昵称，随便写(可修改)
@@ -22,8 +14,6 @@ public class User implements Serializable {
     private Date createTime;    //可以理解为注册时间
     private Date updateTime;    //用户最后信息修改时间
     private Date loginTime;     //用户最后登录时间
-    @TableField(exist = false)
-    private List<Role> roles;
 
     public Integer getId() {
         return id;
@@ -115,14 +105,6 @@ public class User implements Serializable {
         this.loginTime = loginTime;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -136,7 +118,6 @@ public class User implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", loginTime=" + loginTime +
-                ", roles=" + roles +
                 '}';
     }
 }

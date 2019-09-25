@@ -1,12 +1,14 @@
 package com.jason.user.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jason.common.model.Constant;
 import com.jason.user.dao.ManageMapper;
 import com.jason.user.dao.RoleMapper;
 import com.jason.user.dao.UserMapper;
+import com.jason.user.dto.manage.ManageDTO;
+import com.jason.user.dto.role.RoleDTO;
 import com.jason.user.dto.user.UserAddDTO;
+import com.jason.user.dto.user.UserDetailDTO;
+import com.jason.user.dto.user.UserSimpleDTO;
 import com.jason.user.dto.user.UserUpdateDTO;
 import com.jason.user.model.Manage;
 import com.jason.user.model.Role;
@@ -25,7 +27,7 @@ import javax.annotation.Resource;
  * @Version 1.0
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
@@ -35,15 +37,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private ManageMapper manageMapper;
 
     @Override
-    public User getUser(Integer userId) {
-        return userMapper.findById(userId);
+    public UserDetailDTO getUser(Integer userId) {
+         return userMapper.findById(userId);
     }
 
     @Override
-    public Role getRole(String name) {
-        QueryWrapper<Role> roleWrapper = new QueryWrapper<>();
-        roleWrapper.eq("name", name);
-        return roleMapper.selectOne(roleWrapper);
+    public UserSimpleDTO getUser(String username) {
+        return userMapper.findByUsername(username);
+    }
+
+    @Override
+    public RoleDTO getRole(String name) {
+        return  roleMapper.getRole(name);
     }
 
     @Override
@@ -51,8 +56,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Integer addUser(UserAddDTO user) {
         User user1 = new User();
         int result = userMapper.insert(ConvertUtil.convertAdd(user));
-        if (result > 0 && user1.getRoles() != null) {
-            if (addUserRole(user1) > 0) {
+        if (result > 0 && user.getRoleIds() != null) {
+            if (addUserRole(user) > 0) {
                 return Constant.MAPPER_SUCCESS;
             }
         }
@@ -67,7 +72,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     @Override
     public Integer updateUser(UserUpdateDTO user) {
-        return null;
+        User user1 = ConvertUtil.convertUpdate(user);
+        return userMapper.dynamicUpdate(user1);
     }
 
     /**
@@ -77,8 +83,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 返回受影响行数
      */
     @Override
-    public Integer addUserRole(User user) {
-        return userMapper.uRelation(user);
+    public Integer addUserRole(UserAddDTO user) {
+        User user1 = ConvertUtil.convertAdd(user);
+        return userMapper.uRelation(user1);
     }
 
     /**
@@ -88,13 +95,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 返回受影响行数
      */
     @Override
-    public Integer removeUserRole(User user) {
-        return userMapper.deleteMap(user);
+    @Deprecated
+    public Integer removeUserRole(UserDetailDTO user) {
+        return userMapper.deleteMap(null);
     }
 
     @Override
-    public Integer removeRoleManage(Role role) {
-        return roleMapper.deleteMap(role);
+    public Integer removeRoleManage(RoleDTO role) {
+        Role role1 = ConvertUtil.convertRole(role);
+        return roleMapper.deleteMap(role1);
     }
 
     /**
@@ -104,13 +113,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return 返回受影响行数
      */
     @Override
-    public Integer addRoleManage(Role role) {
-        return roleMapper.relation(role);
+    public Integer addRoleManage(RoleDTO role) {
+        Role role1 = ConvertUtil.convertRole(role);
+        return roleMapper.relation(role1);
     }
 
     @Override
-    public Integer addRole(Role role) {
-        int result = roleMapper.insert(role);
+    public Integer addRole(RoleDTO role) {
+        Role role1 = ConvertUtil.convertRole(role);
+        int result = roleMapper.insert(role1);
         if (result > 0) {
             if (addRoleManage(role) > 0) {
                 return Constant.MAPPER_SUCCESS;
@@ -120,18 +131,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public Integer addManage(Manage manage) {
-        return manageMapper.insert(manage);
+    public Integer addManage(ManageDTO manage) {
+        Manage manage1 = ConvertUtil.convertMange(manage);
+        return manageMapper.insert(manage1);
     }
 
     @Override
     public Integer removeManage(Integer id) {
-        return manageMapper.deleteById(id);
+//        return manageMapper.deleteById(id);
+        return null;
     }
 
     @Override
-    public Integer updateMsg(User user) {
-        return userMapper.dynamicUpdate(user);
+    public Integer updateMsg(UserUpdateDTO user) {
+        User user1 = ConvertUtil.convertUpdate(user);
+        return userMapper.dynamicUpdate(user1);
     }
 
 }

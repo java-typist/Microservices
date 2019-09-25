@@ -1,10 +1,10 @@
 package com.jason.common.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 
-import java.sql.Time;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +16,18 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisUtil {
 
+    private static RedisTemplate redisTemplate;
+
     /**
+     * autowired配置静态变量
+     * @param redisTemplate
+     */
+    @Autowired
+    private void init(RedisTemplate redisTemplate){
+        RedisUtil.redisTemplate = redisTemplate;
+    }
+
+    /**a
      * redis操作工具
      *
      * @param key
@@ -25,7 +36,6 @@ public class RedisUtil {
      * @param <T>
      */
     public static <T> void put(String key, T value, Integer time) {
-        RedisTemplate<String, T> redisTemplate = new RedisTemplate<>();
         ValueOperations<String, T> operations = redisTemplate.opsForValue();
         operations.set(key, value, time, TimeUnit.MINUTES);
     }
@@ -38,7 +48,6 @@ public class RedisUtil {
      * @return
      */
     public static <T> T get(String key) {
-        RedisTemplate<String, T> redisTemplate = new RedisTemplate<>();
         ValueOperations<String, T> operations = redisTemplate.opsForValue();
         return operations.get(key);
     }
@@ -65,7 +74,7 @@ public class RedisUtil {
                 redisTemplate.opsForValue().set(key, DataUtil.MD5(UUID.randomUUID().toString()), 30, TimeUnit.MINUTES);
             }
             secretKey = (String) redisTemplate.opsForValue().get(key);
-        }else {
+        } else {
             secretKey = DataUtil.MD5(UUID.randomUUID().toString());
             redisTemplate.opsForValue().set(key, secretKey, 30, TimeUnit.MINUTES);
         }

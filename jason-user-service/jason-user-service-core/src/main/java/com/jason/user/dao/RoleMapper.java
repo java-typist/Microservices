@@ -1,6 +1,6 @@
 package com.jason.user.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jason.user.dto.role.RoleDTO;
 import com.jason.user.model.Role;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
@@ -13,18 +13,26 @@ import java.util.List;
  * @Modify 2019/8/19 15:35
  * @Version 1.0
  */
-public interface RoleMapper extends BaseMapper<Role> {
+public interface RoleMapper{
 
     @Results(id = "roleMsg", value = {
             @Result(property = "id", column = "id"),
             @Result(property = "name", column = "name"),
-            @Result(property = "level", column = "level"),
             @Result(property = "manages", column = "id", many = @Many(
                     select = "com.jason.user.dao.ManageMapper.findByRoleId", fetchType = FetchType.LAZY))
     })
     @Select("select * from table_role where id in " +
             "(select roleId from map_user_role where userId=#{userId})")
-    List<Role> findByUserId(@Param("userId") Integer userId);
+    List<RoleDTO> findByUserId(@Param("userId") Integer userId);
+
+    @Results(id = "role", value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "manages", column = "id", many = @Many(
+                    select = "com.jason.user.dao.ManageMapper.findByRoleId", fetchType = FetchType.LAZY))
+    })
+    @Select("select * from table_role where name=#{name}")
+    RoleDTO getRole(@Param("name") String name);
 
     @Insert({
             "<script>",
@@ -36,6 +44,9 @@ public interface RoleMapper extends BaseMapper<Role> {
             "</script>"
     })
     int relation(Role role);
+
+    @Insert({"insert into table_role(name, level)values(#{name}, #{level})"})
+    Integer insert(Role role);
 
     @Delete({
             "<script>",

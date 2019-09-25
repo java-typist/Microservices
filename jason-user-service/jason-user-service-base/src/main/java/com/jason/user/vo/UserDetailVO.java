@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDetailVO implements Serializable {
     private Integer id;
     private String username;
-    private String nickName;
+    private String nickname;
     private String phone;
     private String email;
     private Integer status;
@@ -34,12 +34,12 @@ public class UserDetailVO implements Serializable {
         this.username = username;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPhone() {

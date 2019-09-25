@@ -14,7 +14,7 @@ public class UserServiceFallbackFactory implements FallbackFactory<UserAPI> {
     public UserAPI create(Throwable throwable) {
         return new UserAPI() {
             @Override
-            public Response login(UserSimpleVO user) {
+            public Response login(LoginVO user) {
                 Response response = new Response();
                 response.error(Constant.REQUEST_FAILURE, throwable.getMessage());
                 return response;

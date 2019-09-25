@@ -1,7 +1,7 @@
 package com.jason.user.utils;
 
 import com.jason.common.utils.RedisUtil;
-import com.jason.user.model.User;
+import com.jason.user.dto.user.UserSimpleDTO;
 
 /**
  * @Author Jason
@@ -17,7 +17,7 @@ public class TokenUtil {
      *
      * @param user
      */
-    public static void flushToken(User user) {
+    public static void flushToken(UserSimpleDTO user) {
         String token = RedisUtil.get(user.getUsername());
         addToken(token, user);
     }
@@ -27,7 +27,7 @@ public class TokenUtil {
      * @param token
      * @param user
      */
-    public static void addToken(String token, User user) {
+    public static void addToken(String token, UserSimpleDTO user) {
         RedisUtil.put(user.getUsername(), token, 30);
         RedisUtil.put(token, user, 30);
     }

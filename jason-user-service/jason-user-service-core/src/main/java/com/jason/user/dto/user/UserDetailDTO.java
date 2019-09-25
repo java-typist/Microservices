@@ -13,7 +13,8 @@ import java.util.List;
 public class UserDetailDTO {
 
     private Integer id;
-    private String nickName;
+    private String username;
+    private String nickname;
     private String image;
     private String phone;
     private String email;
@@ -28,12 +29,20 @@ public class UserDetailDTO {
         this.id = id;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getImage() {

@@ -1,12 +1,6 @@
 package com.jason.user.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-@TableName(value = "table_manage")
 public class Manage {
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String name;
     private String directory;

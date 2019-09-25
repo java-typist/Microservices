@@ -1,17 +1,16 @@
 package com.jason.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jason.common.model.Constant;
 import com.jason.common.model.Response;
 import com.jason.common.utils.DataUtil;
 import com.jason.user.UserServiceAPP;
-import com.jason.user.model.Role;
-import com.jason.user.model.User;
+import com.jason.user.dto.role.RoleDTO;
+import com.jason.user.dto.user.UserSimpleDTO;
 import com.jason.user.service.UserService;
 import com.jason.user.utils.ConvertUtil;
 import com.jason.user.utils.TokenUtil;
+import com.jason.user.vo.LoginVO;
 import com.jason.user.vo.UserAddVO;
-import com.jason.user.vo.UserSimpleVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Date;
 
 /**
  * @Author Jason
@@ -48,6 +47,7 @@ public class BaseController {
 
     /**
      * 普通用户注册
+     *
      * @param user
      * @return
      */
@@ -55,12 +55,10 @@ public class BaseController {
     public Response register(@RequestBody UserAddVO user) {
         Response response = new Response();
 
-        QueryWrapper<User> userWrapper = new QueryWrapper<>();
-        userWrapper.eq("username", user.getUsername());
-        if (userService.getOne(userWrapper) != null) {
+        if (userService.getUser(user.getUsername()) != null) {
             response.error(Constant.REQUEST_FAILURE, "用户名不可用");
         } else {
-            Role role = userService.getRole("user");
+            RoleDTO role = userService.getRole("user");
             user.setRoleIds(new ArrayList<>());
             user.getRoleIds().add(role.getId());
             if (userService.addUser(ConvertUtil.convertAdd(user)).equals(Constant.MAPPER_SUCCESS)) {
@@ -73,15 +71,13 @@ public class BaseController {
     }
 
     @PostMapping(value = "/login")
-    public Response login(@RequestBody User user) {
+    public Response login(@RequestBody LoginVO user) {
         Response response = new Response();
-        QueryWrapper<User> userWrapper = new QueryWrapper<>();
-        userWrapper.eq("username", user.getUsername());
-        User check = userService.getOne(userWrapper);
+        UserSimpleDTO check = userService.getUser(user.getUsername());
         if (check == null) {
             response.error(Constant.REQUEST_FAILURE, "用户不存在");
-        } else if (check.getPassword().equals(user.getPassword())) {
-            String token = DataUtil.MD5(check.getId() + user.getUsername());      //todo
+        } else if (userService.getUser(user.getUsername()) != null) {
+            String token = DataUtil.MD5("" + check.getId() + new Date().getTime());      //todo
             TokenUtil.addToken(token, check);
             response.success(Constant.REQUEST_SUCCESS, "登录成功", token);
         } else {

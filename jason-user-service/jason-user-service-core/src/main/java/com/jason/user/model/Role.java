@@ -1,20 +1,9 @@
 package com.jason.user.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.util.List;
-
-@TableName(value = "table_role")
 public class Role {
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String name;
     private Integer level;
-    @TableField(exist = false)
-    private List<Manage> manages;
 
     public Integer getId() {
         return id;
@@ -40,21 +29,12 @@ public class Role {
         this.level = level;
     }
 
-    public List<Manage> getManages() {
-        return manages;
-    }
-
-    public void setManages(List<Manage> manages) {
-        this.manages = manages;
-    }
-
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", level=" + level +
-                ", manages=" + manages +
                 '}';
     }
 }

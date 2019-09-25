@@ -1,14 +1,17 @@
 package com.jason.user.dto.user;
 
+import java.io.Serializable;
+
 /**
  * @author Jason
  * @version 1.0
  * @createTime 2019/9/19 14:51
  * @modify 2019/9/19 14:51
  */
-public class UserSimpleDTO {
+public class UserSimpleDTO implements Serializable {
     private Integer id;
-    private String nickName;
+    private String username;
+    private String nickname;
     private String phone;
     private String email;
 
@@ -20,12 +23,20 @@ public class UserSimpleDTO {
         this.id = id;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPhone() {
@@ -42,5 +53,16 @@ public class UserSimpleDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "UserSimpleDTO{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

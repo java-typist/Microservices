@@ -26,6 +26,7 @@ public class ProjectController {
         Response response = new Response();
         Response result = userAPI.getUser("Jason");
 //        System.out.println(">>>>" + user.getPassword());
+        System.out.println(result.getClass().getName());
         return result;
     }
 }

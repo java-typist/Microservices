@@ -12,7 +12,7 @@
     <artifactId>jason-user-service-core</artifactId>
 
     <properties>
-<!--        <mybatis.version>2.0.0</mybatis.version>-->
+        <mybatis.version>2.0.1</mybatis.version>
         <druid.version>1.1.10</druid.version>
     </properties>
 
@@ -34,12 +34,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-<!--        引入了mybatis-plus，故不引入mybatis-->
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--            <version>${mybatis.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -76,6 +75,12 @@
                     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

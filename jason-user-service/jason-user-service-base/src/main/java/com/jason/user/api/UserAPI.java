@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public interface UserAPI {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    Response login(@RequestBody UserSimpleVO user);
+    Response login(@RequestBody LoginVO user);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     Response register(@RequestBody UserAddVO user);

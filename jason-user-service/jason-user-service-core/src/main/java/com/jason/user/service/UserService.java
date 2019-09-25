@@ -1,34 +1,36 @@
 package com.jason.user.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.jason.user.dto.manage.ManageDTO;
+import com.jason.user.dto.role.RoleDTO;
 import com.jason.user.dto.user.UserAddDTO;
+import com.jason.user.dto.user.UserDetailDTO;
+import com.jason.user.dto.user.UserSimpleDTO;
 import com.jason.user.dto.user.UserUpdateDTO;
-import com.jason.user.model.Manage;
-import com.jason.user.model.Role;
-import com.jason.user.model.User;
 
-public interface UserService extends IService<User> {
-    User getUser(Integer userId);
+public interface UserService{
+    UserDetailDTO getUser(Integer userId);
 
-    Role getRole(String name);
+    UserSimpleDTO getUser(String username);
+
+    RoleDTO getRole(String name);
 
     Integer addUser(UserAddDTO user);
 
     Integer updateUser(UserUpdateDTO user);
 
-    Integer addUserRole(User user);
+    Integer addUserRole(UserAddDTO user);
 
-    Integer removeUserRole(User user);
+    Integer removeUserRole(UserDetailDTO user);
 
-    Integer removeRoleManage(Role role);
+    Integer removeRoleManage(RoleDTO role);
 
-    Integer addRole(Role role);
+    Integer addRole(RoleDTO role);
 
-    Integer addRoleManage(Role role);
+    Integer addRoleManage(RoleDTO role);
 
-    Integer addManage(Manage manage);
+    Integer addManage(ManageDTO manage);
 
     Integer removeManage(Integer id);
 
-    Integer updateMsg(User user);
+    Integer updateMsg(UserUpdateDTO user);
 }
